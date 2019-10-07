@@ -1,10 +1,10 @@
 package com.chiennm.mongo;
 
 import com.chiennm.mongo.entity.Gender;
+import com.chiennm.mongo.entity.Job;
 import com.chiennm.mongo.entity.User;
-import com.chiennm.mongo.entity.UserDetail;
+import com.chiennm.mongo.service.JobService;
 import com.chiennm.mongo.service.UserService;
-import org.bson.types.ObjectId;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,6 +16,9 @@ public class UserServiceTest extends MongoApplicationTests {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private JobService jobService;
+
     @Test
     public void insert() {
         for (int j = 1; j < 10; j++) {
@@ -26,24 +29,20 @@ public class UserServiceTest extends MongoApplicationTests {
             user.setEmail("anhnk@vnext.com.vn");
             user.setGender(Gender.FEMALE);
 
-            List<UserDetail> userDetails = new ArrayList<>();
-            for (int i = 0; i < 10; i++) {
-                UserDetail userDetail = new UserDetail();
-//                userDetail.setId((long) i);
-                userDetail.setId(new ObjectId());
-                userDetail.setJob("Tester " + i);
-                userDetail.setCompany("VNEXT " + i);
-                userDetail.setAddress("219 Trung Kinh");
-                userDetails.add(userDetail);
-            }
-            user.setUserDetails(userDetails);
+            List<Job> jobs = new ArrayList<>();
+            Job job1 = jobService.findById("5d95a7d9cb5cd42ec0ee336c");
+            Job job2 = jobService.findById("5d95a7d9cb5cd42ec0ee336d");
+
+            jobs.add(job1);
+            jobs.add(job2);
+            user.setJobs(jobs);
             userService.save(user);
         }
     }
 
     @Test
     public void findById() {
-        User user = userService.findById("5d946f0acb5cd43b78cb09d8");
+        User user = userService.findById("5d9b13fc87485134f9778474");
         System.out.println(user);
         System.out.println(user.getUserDetails());
     }
