@@ -14,6 +14,7 @@ public class JobServiceTest extends MongoApplicationTests {
     public void insert() {
         for (int i = 0; i < 10; i++) {
             Job job = new Job();
+            job.setJobId(String.valueOf(i));
             job.setName("CNTT " + i);
             job.setDescription("Description " + i);
             jobService.save(job);
@@ -21,7 +22,7 @@ public class JobServiceTest extends MongoApplicationTests {
     }
 
     @Test
-    public void findById(){
+    public void findById() {
         Job job = jobService.findById("5d95a7d9cb5cd42ec0ee336c");
         System.out.println(job);
     }

@@ -30,11 +30,16 @@ public class UserServiceTest extends MongoApplicationTests {
             user.setGender(Gender.FEMALE);
 
             List<Job> jobs = new ArrayList<>();
-            Job job1 = jobService.findById("5d95a7d9cb5cd42ec0ee336c");
-            Job job2 = jobService.findById("5d95a7d9cb5cd42ec0ee336d");
+            Job job1 = jobService.findByKeyAndValue("jobId", "1");
+            Job job2 = jobService.findByKeyAndValue("jobId", "2");
+            Job job3 = jobService.findByKeyAndValue("jobId", "3");
+//            Job job1 = jobService.findById("5d9beb428748516f108a93bd");
+//            Job job2 = jobService.findById("5d9beb428748516f108a93be");
+//            Job job3 = jobService.findById("5d9beb428748516f108a93bf");
 
             jobs.add(job1);
             jobs.add(job2);
+            jobs.add(job3);
             user.setJobs(jobs);
             userService.save(user);
         }

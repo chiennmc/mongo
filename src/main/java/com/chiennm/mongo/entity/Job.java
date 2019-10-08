@@ -14,10 +14,14 @@ import org.springframework.data.mongodb.core.mapping.Field;
 public class Job {
     public static final String NAME = "name";
     public static final String DESCRIPTION = "description";
+    public static final String JOB_ID = "jobId";
 
     @Indexed
     @Id
     private ObjectId _id;
+
+    @Field(value = JOB_ID)
+    private String jobId;
 
     @Field(value = NAME)
     private String name;
